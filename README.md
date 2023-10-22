@@ -1,4 +1,4 @@
-# Project 7 -  Infrastructure Provisioning Automation with Ansible and Terraform
+# Project 2 -  Infrastructure Provisioning Automation with Ansible and/or Terraform
 
 This project deploys AWS infrastructure using infrastructure provisioning automation tools (Infrastructure as Code). There are three sets of infrastructure components that will be deployed on AWS:
 - AWS VPC network.;
