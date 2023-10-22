@@ -99,9 +99,9 @@ Available routes:
 ```
 
 ## Diagram
+![diagram](https://github.com/smit343/Infrastructure-Provisioning-Automation-/assets/60944678/73418260-a5f5-40b7-8592-d51bcb055a70)
 
-![AWS Diagram of Project 7, parts 1 and 2](./project7_part12.jpg)
-![AWS Diagram of Project 7, part 3](./project7_part3.jpg)
+
 
 ## Authors
 
