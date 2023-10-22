@@ -98,8 +98,11 @@ Available routes:
 
 ```
 
-## Diagram
-![diagram](https://github.com/smit343/Infrastructure-Provisioning-Automation-/assets/60944678/73418260-a5f5-40b7-8592-d51bcb055a70)
+Diagram:
+
+(https://github.com/smit343/Infrastructure-Provisioning-Automation-/assets/60944678/73418260-a5f5-40b7-8592-d51bcb055a70)
+
+
 
 
 
