@@ -1,16 +1,26 @@
 # Project 7 -  Infrastructure Provisioning Automation with Ansible and Terraform
 
 This project deploys AWS infrastructure using infrastructure provisioning automation tools (Infrastructure as Code). There are three sets of infrastructure components that will be deployed on AWS:
-- EC2 servers to host a web app architecture with API and Database (using Ansible);
-- EC2 instance hosting a Jenkins server (using Ansible);
-- Functional AWS EKS cluster hosting a web app with API and Database (using Terraform).
+- AWS VPC network.;
+  
+- Database server.
+Create and launch an EC2 instance - e.g. Ubuntu 22.04 - into the private subnet created earlier.
+Download and install a database server in the EC2 instance - e.g. MySQL, PostgreSQL or MongoDB.
+Start and enable the database server service and ensure the database ports - e.g. 3306, 5432, etc. - are open and able to receive connections.;
 
-This repository is composed of the following YAML, Terraform, and Bash Script files:
-- Part 1: infra.ansible.yaml, userdata.sh, userdata_app.sh.
-- Part 2: jenkins.ansible.yaml,jenkinsinfra.ansible.yaml.
-- Part 3: app-deployment.yaml, mongo-deployment.yaml, app-service.yaml, mongo-service.yaml, eks-cluster.tf, main.tf, outputs.tf, terraform.tf, variable.tf, vpc.tf.
+- API server.
+Create and launch an EC2 instance - e.g. Ubuntu 22.04 - into the public subnet created earlier.
+Download and install packages for an API server.
+For example for a Python FastAPI API server:
+Python 3.10.
+fastapi python library.
 
-URL for the public GitHub repository: [https://github.com/caroldelwing/WCD-DevOps/tree/main/project_7]
+
+This repository is composed of the following files:
+- infra.ansible.yaml, userdata.sh, userdata_app.sh.
+
+
+URL for the public GitHub repository: https://github.com/smit343/Infrastructure-Provisioning-Automation-
 
 ## Table of contents
 
@@ -26,8 +36,8 @@ URL for the public GitHub repository: [https://github.com/caroldelwing/WCD-DevOp
 - AWS account;
 - IAM user with sufficient rights;
 - Access to a Linux terminal;
-- Have AWS CLI, git , python3, pip, botocore, boto3, ansible and Terraform CLI installed on your Linux machine;
-- Basic knowledge of Ansible, Terraform, AWS EKS, and Git. 
+- Have AWS CLI, git, ansible installed on your Linux machine;
+- Basic knowledge of Ansible, AWS, and Git. 
 
 ## Installation
 
@@ -42,10 +52,7 @@ https://git-scm.com/book/en/v2/Getting-Started-Installing-Git
 - Ansible:
 https://docs.ansible.com/ansible/latest/installation_guide/intro_installation.html
 
-- Terraform:
-https://developer.hashicorp.com/terraform/tutorials/aws-get-started/install-cli
-
-- Python3, pip, botocore, boto3:
+- Python3, pip:
 ```sh
 #Python3
 sudo apt update
@@ -54,11 +61,8 @@ sudo apt install python3
 #pip
 sudo apt install python3-pip
 
-#botocore and boto3
-pip3 install botocore boto3
-```
 
-## Getting Started
+\## Getting Started
 
 - To have access to your AWS account through your IAM user, execute the following command in your terminal
 ```sh
@@ -69,66 +73,30 @@ Default region name [None]: us-east-1
 Default output format [None]:
 ```
 
-- In your terminal, clone this repository and navigate to the project 7 folder:
+- In your terminal, clone this repository :
 ```
-git clone https://github.com/caroldelwing/WCD-DevOps
-cd WCD-DevOps/project_7
+git clone https://github.com/smit343/Infrastructure-Provisioning-Automation-
+cd Infrastructure-Provisioning-Automation-
 ```
- Make sure your path to project 7 is **home/ubuntu/WCD-DevOps/project_7**, otherwise, you will have to edit the path in the part 2 Ansible files.
 
 ## Usage
 
-- Execute the Ansible playbooks in the following order (parts 1 and 2):
+- Execute the Ansible playbooks in the following order :
 ```sh
 ansible-playbook infra.ansible.yaml
-ansible-playbook jenkinsinfra.ansible.yaml
-ansible-playbook -i hosts jenkins.ansible.yaml
-```
-
-- Deploy the EKS Cluster with Terraform (part 3):
-```sh
-terraform init
-terraform validate
-terraform plan
-terraform apply -auto-approve
-```
-
-- Once your EKS cluster is up and running, configure kubectl to interact with your cluster by running this command in your terminal:
-```sh
-aws eks update-kubeconfig --region <region> --name <EKS_cluster_name>
-```
-- Then, deploy the application by running the manifests in the following order:
-```sh
-kubectl apply -f mongo-service.yaml
-kubectl apply -f mongo-deployment.yaml
-kubectl apply -f app-service.yaml
-kubectl apply -f app-deployment.yaml
 ```
 
 ## Testing the Results
-- Part 1: copy the DNS of the load balancer created in part 1, and paste it on your web browser, editing the route according to the desired output:
+- Copy the DNS of the load balancer created, and paste it on your web browser, editing the route according to the desired output:
 
 Available routes:
 
-- `/` - returns all documents in the nhl_stats_2022 collection.
+- `/` - returns all documents in the database-players.csv collection.
 - `/players/top/:number` - returns top players. For example, /players/top/10 will return the top 10 players leading in points scored.
 - `/players/team/:teamname` - returns all players of a team. For example, /players/team/TOR will return all players of Toronto Maple Leafs.
 - `/teams` - returns a list of the teams.
 
-- Part 2: copy the public IP of the Jenkins EC2 instance and paste it on your web browser according to the model PublicIPV4:8080
-
-- Part 3: use the following command to get the external ip of the load balancer:
-```sh
-kubectl get services
 ```
-Paste the load balancer external ip (which is the load balancer address) in your browser and add the desired route. 
-
-Available routes:
-
-- `/` - returns all documents in the nhl_stats_2022 collection.
-- `/players/top/:number` - returns top players. For example, /players/top/10 will return the top 10 players leading in points scored.
-- `/players/team/:teamname` - returns all players of a team. For example, /players/team/TOR will return all players of Toronto Maple Leafs.
-- `/teams` - returns a list of the teams.
 
 ## Diagram
 
@@ -137,6 +105,4 @@ Available routes:
 
 ## Authors
 
-- Beatriz Carvalho de Oliveira - https://github.com/beatrizCarvalhoOliveira
-- Carolina Delwing Rosa - https://github.com/caroldelwing
-- Zakiir Juman - https://github.com/zakiirjuman
+- Smit Patel - (https://github.com/smit343/Infrastructure-Provisioning-Automation-)
